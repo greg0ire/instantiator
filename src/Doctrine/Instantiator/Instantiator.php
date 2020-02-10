@@ -47,7 +47,7 @@ final class Instantiator implements InstantiatorInterface
     /**
      * {@inheritDoc}
      */
-    public function instantiate($className)
+    public function instantiate(string $className) : object
     {
         if (isset(self::$cachedCloneables[$className])) {
             return clone self::$cachedCloneables[$className];
@@ -64,10 +64,8 @@ final class Instantiator implements InstantiatorInterface
 
     /**
      * Builds the requested object and caches it in static properties for performance
-     *
-     * @return object
      */
-    private function buildAndCacheFromFactory(string $className)
+    private function buildAndCacheFromFactory(string $className) : object
     {
         $factory  = self::$cachedInstantiators[$className] = $this->buildFactory($className);
         $instance = $factory();
